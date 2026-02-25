@@ -2,7 +2,7 @@ import SiteLayout from '../components/SiteLayout'
 
 export default function Research() {
   return (
-    <SiteLayout title="研究 / Papers" subtitle="Working Papers, Publications, and Ongoing Projects">
+    <SiteLayout title="Research / Papers" subtitle="Working Papers, Publications, and Ongoing Projects">
       <section className="card">
         <h2>Working Papers</h2>
         <div className="paper-item">
@@ -32,7 +32,7 @@ export default function Research() {
 
       <section className="card">
         <h2>Publications</h2>
-        <p>如果你目前还没有已发表论文，可以先写 “No publications yet.”，等后续更新。</p>
+        <p>If you do not have published papers yet, you can write: "No publications yet."</p>
       </section>
     </SiteLayout>
   )

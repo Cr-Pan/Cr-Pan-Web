@@ -4,43 +4,44 @@ import SiteLayout from '../components/SiteLayout'
 export default function Home() {
   return (
     <SiteLayout
-      title="姓名（你的名字）"
+      title="Your Name"
       subtitle="PhD Candidate in Economics · University Name"
     >
       <section className="card hero-grid">
         <div>
-          <h2>研究方向</h2>
+          <h2>Research Interests</h2>
           <p>
-            我的研究聚焦于 labor economics、applied microeconomics 与 policy
-            evaluation，使用实证方法识别劳动市场中的因果效应。
+            My research focuses on labor economics, applied microeconomics, and
+            policy evaluation. I use empirical methods to identify causal effects
+            in labor markets.
           </p>
           <div className="cta-row">
             <Link href="/research" className="btn btn-primary">
-              查看研究
+              View Research
             </Link>
             <Link href="/resume" className="btn btn-secondary">
-              查看 CV
+              View CV
             </Link>
           </div>
         </div>
         <div className="meta-list">
           <p>
-            <span>机构</span>University Name
+            <span>Affiliation</span>University Name
           </p>
           <p>
-            <span>邮箱</span>your.name@example.com
+            <span>Email</span>your.name@example.com
           </p>
           <p>
-            <span>状态</span>Job Market 2026-2027
+            <span>Status</span>Job Market 2026-2027
           </p>
           <p>
-            <span>地点</span>City, State, US
+            <span>Location</span>City, State, US
           </p>
         </div>
       </section>
 
       <section className="card">
-        <h2>最新动态</h2>
+        <h2>Recent Updates</h2>
         <ul className="clean-list">
           <li>Feb 2026: Working paper updated with new identification checks.</li>
           <li>Jan 2026: Presented at the Applied Micro Seminar.</li>
@@ -49,9 +50,10 @@ export default function Home() {
       </section>
 
       <section className="card">
-        <h2>一句话研究简介</h2>
+        <h2>One-Sentence Research Summary</h2>
         <p>
-          我关注“政策如何改变个体劳动供给和企业雇佣行为”，并将结构化数据与准自然实验结合。
+          I study how policy affects individual labor supply and firm hiring,
+          combining rich administrative data with quasi-experimental designs.
         </p>
       </section>
     </SiteLayout>

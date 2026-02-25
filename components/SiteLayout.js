@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 const navItems = [
-  { href: '/', label: '首页' },
-  { href: '/research', label: '研究' },
-  { href: '/resume', label: '简历' },
-  { href: '/contact', label: '联系' },
+  { href: '/', label: 'Home' },
+  { href: '/research', label: 'Research' },
+  { href: '/resume', label: 'CV' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function SiteLayout({ title, subtitle, children }) {
@@ -22,7 +22,7 @@ export default function SiteLayout({ title, subtitle, children }) {
             <h1>{title}</h1>
             {subtitle ? <p className="subtitle">{subtitle}</p> : null}
           </div>
-          <nav className="top-nav" aria-label="主导航">
+          <nav className="top-nav" aria-label="Main navigation">
             {navItems.map((item) => {
               const active = router.pathname === item.href
               return (
@@ -41,7 +41,7 @@ export default function SiteLayout({ title, subtitle, children }) {
         <main>{children}</main>
 
         <footer className="site-footer">
-          <p>© {new Date().getFullYear()} 你的名字 · Last updated: February 2026</p>
+          <p>© {new Date().getFullYear()} Your Name · Last updated: February 2026</p>
         </footer>
       </div>
     </div>

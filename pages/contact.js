@@ -2,7 +2,7 @@ import SiteLayout from '../components/SiteLayout'
 
 export default function Contact() {
   return (
-    <SiteLayout title="联系方式" subtitle="Feel free to reach out for research discussions or collaboration">
+    <SiteLayout title="Contact" subtitle="Feel free to reach out for research discussions or collaboration">
       <section className="card contact-grid">
         <div>
           <h2>Primary Contact</h2>

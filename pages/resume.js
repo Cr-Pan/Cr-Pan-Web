@@ -2,12 +2,12 @@ import SiteLayout from '../components/SiteLayout'
 
 export default function Resume() {
   return (
-    <SiteLayout title="简历 / CV" subtitle="Education, Positions, Teaching and Service">
+    <SiteLayout title="Resume / CV" subtitle="Education, Positions, Teaching and Service">
       <section className="card">
         <div className="section-title-row">
-          <h2>简历概览</h2>
+          <h2>CV Overview</h2>
           <a href="#" className="btn btn-secondary">
-            下载完整 CV (PDF)
+            Download Full CV (PDF)
           </a>
         </div>
         <div className="timeline">
