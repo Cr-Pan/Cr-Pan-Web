@@ -41,7 +41,7 @@ export default function SiteLayout({ title, subtitle, children }) {
         <main>{children}</main>
 
         <footer className="site-footer">
-          <p>© {new Date().getFullYear()} Your Name · Last updated: February 2026</p>
+          <p>© {new Date().getFullYear()} Congrong Pan · Last updated: February 2026</p>
         </footer>
       </div>
     </div>

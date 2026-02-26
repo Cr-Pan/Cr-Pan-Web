@@ -4,16 +4,16 @@ import SiteLayout from '../components/SiteLayout'
 export default function Home() {
   return (
     <SiteLayout
-      title="Your Name"
-      subtitle="PhD Candidate in Economics · University Name"
+      title="Congrong Pan"
+      subtitle="Economics Researcher · IO and Health Economics"
     >
       <section className="card hero-grid">
         <div>
           <h2>Research Interests</h2>
           <p>
-            My research focuses on labor economics, applied microeconomics, and
-            policy evaluation. I use empirical methods to identify causal effects
-            in labor markets.
+            My research focuses on industrial organization and health economics. I
+            study how policy design and performance incentives shape provider and
+            individual behavior using administrative data and quasi-experimental methods.
           </p>
           <div className="cta-row">
             <Link href="/research" className="btn btn-primary">
@@ -26,16 +26,16 @@ export default function Home() {
         </div>
         <div className="meta-list">
           <p>
-            <span>Affiliation</span>University Name
+            <span>Affiliation</span>UW-Madison / Shandong University
           </p>
           <p>
-            <span>Email</span>your.name@example.com
+            <span>Email</span>pancrecon123@gmail.com
           </p>
           <p>
-            <span>Status</span>Job Market 2026-2027
+            <span>Status</span>Research Assistant
           </p>
           <p>
-            <span>Location</span>City, State, US
+            <span>Location</span>Madison & Jinan
           </p>
         </div>
       </section>
@@ -43,17 +43,17 @@ export default function Home() {
       <section className="card">
         <h2>Recent Updates</h2>
         <ul className="clean-list">
-          <li>Feb 2026: Working paper updated with new identification checks.</li>
-          <li>Jan 2026: Presented at the Applied Micro Seminar.</li>
-          <li>Dec 2025: Awarded departmental research grant.</li>
+          <li>May 2025 - Present: Research Assistant for Prof. Panle Barwick at UW-Madison.</li>
+          <li>July 2025 - Present: Full-time Research Assistant at NSD, Peking University.</li>
+          <li>Current: Working on hospital incentives, coding responses, and policy distortion.</li>
         </ul>
       </section>
 
       <section className="card">
         <h2>One-Sentence Research Summary</h2>
         <p>
-          I study how policy affects individual labor supply and firm hiring,
-          combining rich administrative data with quasi-experimental designs.
+          I examine how policy rules and metrics change real behavior and reporting,
+          combining theory with quasi-experimental evidence from rich administrative data.
         </p>
       </section>
     </SiteLayout>
