@@ -85,6 +85,18 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
           {
             "label": "Panle Barwick",
             "href": "https://panlebarwick.github.io/index.html"
+          },
+          {
+            "label": "Tianli Xia",
+            "href": "https://simon.rochester.edu/faculty/tianli-xia"
+          },
+          {
+            "label": "Hongyuan Xia",
+            "href": "https://hongyuan-xia.github.io"
+          },
+          {
+            "label": "Lutz Sager",
+            "href": "https://faculty.essec.edu/en/cv/sager-lutz/"
           }
         ]
       }
