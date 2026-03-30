@@ -198,12 +198,6 @@ p {
   font-size: clamp(1.85rem, 2.8vw, 2.3rem);
 }
 
-.profile-subtitle {
-  margin-top: 10px;
-  color: var(--muted);
-  font-size: 1rem;
-}
-
 .profile-meta-list {
   margin-top: 18px;
   padding-top: 18px;
@@ -296,6 +290,22 @@ p {
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-top: 0;
   background: linear-gradient(180deg, rgba(255, 252, 247, 0.92) 0%, rgba(249, 246, 241, 0.98) 100%);
+}
+
+.hero-banner-subtitle {
+  margin-bottom: 14px;
+}
+
+.hero-banner-subtitle-line {
+  margin: 0;
+  color: var(--accent);
+  font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.35;
+}
+
+.hero-banner-subtitle-line + .hero-banner-subtitle-line {
+  margin-top: 2px;
 }
 
 .hero-banner-text {

@@ -10,6 +10,7 @@ export default function Home({ site, pageContent }) {
   const router = useRouter()
   const profileImageSrc = withBasePath(pageContent.profileImage?.src, router.basePath)
   const campusImageSrc = withBasePath(pageContent.campusImage?.src, router.basePath)
+  const subtitleLines = pageContent.subtitle?.split(' · ').filter(Boolean) ?? []
 
   return (
     <SiteLayout
@@ -30,7 +31,6 @@ export default function Home({ site, pageContent }) {
             </div>
             <p className="profile-kicker">{site?.kicker}</p>
             <h1 className="profile-name">{pageContent.title}</h1>
-            <p className="profile-subtitle">{pageContent.subtitle}</p>
 
             <div className="profile-meta-list">
               {pageContent.metaItems.map((item) => (
@@ -71,6 +71,13 @@ export default function Home({ site, pageContent }) {
               />
             </div>
             <div className="hero-banner-copy">
+              <div className="hero-banner-subtitle" aria-label="Academic summary">
+                {subtitleLines.map((line) => (
+                  <p className="hero-banner-subtitle-line" key={line}>
+                    {line}
+                  </p>
+                ))}
+              </div>
               <p className="section-kicker">{pageContent.hero.sectionTitle}</p>
               <p className="hero-banner-text">{pageContent.hero.body}</p>
             </div>
