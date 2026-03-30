@@ -44,6 +44,45 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
     "May 2025 - Present: Research Assistant for Prof. Panle Barwick at UW-Madison.",
     "July 2025 - Present: Full-time Research Assistant for Prof. Cong Peng at NSD, Peking University."
   ],
+  "recommendedLinks": {
+    "sectionTitle": "Recommended Links",
+    "groups": [
+      {
+        "title": "Institutions",
+        "links": [
+          {
+            "label": "School of Economics, Shandong University",
+            "href": "http://www.soe.sdu.edu.cn"
+          },
+          {
+            "label": "Department of Economics, UW-Madison",
+            "href": "https://econ.wisc.edu/"
+          },
+          {
+            "label": "Department of Economics, Emory University",
+            "href": "https://economics.emory.edu/"
+          },
+          {
+            "label": "National School of Development, Peking University",
+            "href": "https://en.nsd.pku.edu.cn/"
+          }
+        ]
+      },
+      {
+        "title": "Researchers",
+        "links": [
+          {
+            "label": "Cong Peng",
+            "href": "https://www.congpeng.org"
+          },
+          {
+            "label": "Panle Barwick",
+            "href": "https://panlebarwick.github.io/index.html"
+          }
+        ]
+      }
+    ]
+  },
   "summary": {
     "sectionTitle": "One-Sentence Research Summary",
     "body": "I examine how policy rules and metrics change real behavior and reporting, combining theory with quasi-experimental evidence from rich administrative data."

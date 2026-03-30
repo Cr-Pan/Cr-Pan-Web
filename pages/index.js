@@ -47,6 +47,31 @@ export default function Home({ site, pageContent }) {
       </section>
 
       <section className="card">
+        <h2>{pageContent.recommendedLinks.sectionTitle}</h2>
+        <div className="link-groups">
+          {pageContent.recommendedLinks.groups.map((group) => (
+            <div className="link-group" key={group.title}>
+              <h3>{group.title}</h3>
+              <ul className="link-list">
+                {group.links.map((item) => (
+                  <li key={item.href}>
+                    <a
+                      href={item.href}
+                      className="text-link"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="card">
         <h2>{pageContent.summary.sectionTitle}</h2>
         <p>{pageContent.summary.body}</p>
       </section>
