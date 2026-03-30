@@ -72,46 +72,43 @@ export default function Home({ site, pageContent }) {
             </div>
             <div className="hero-banner-copy">
               <p className="section-kicker">{pageContent.hero.sectionTitle}</p>
-              <h2 className="hero-banner-title">{pageContent.subtitle}</h2>
               <p className="hero-banner-text">{pageContent.hero.body}</p>
             </div>
           </section>
 
-          <div className="home-section-grid">
-            <section className="card section-panel">
-              <h2>{pageContent.recentUpdatesTitle}</h2>
-              <ul className="clean-list">
-                {pageContent.recentUpdates.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </section>
+          <section className="card section-panel">
+            <h2>{pageContent.recentUpdatesTitle}</h2>
+            <ul className="clean-list">
+              {pageContent.recentUpdates.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </section>
 
-            <section className="card section-panel">
-              <h2>{pageContent.recommendedLinks.sectionTitle}</h2>
-              <div className="link-groups">
-                {pageContent.recommendedLinks.groups.map((group) => (
-                  <div className="link-group" key={group.title}>
-                    <h3>{group.title}</h3>
-                    <ul className="link-list">
-                      {group.links.map((item) => (
-                        <li key={item.href}>
-                          <a
-                            href={item.href}
-                            className="text-link"
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            {item.label}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </div>
+          <section className="card section-panel">
+            <h2>{pageContent.recommendedLinks.sectionTitle}</h2>
+            <div className="stacked-link-groups">
+              {pageContent.recommendedLinks.groups.map((group) => (
+                <div className="link-group" key={group.title}>
+                  <h3>{group.title}</h3>
+                  <ul className="link-list">
+                    {group.links.map((item) => (
+                      <li key={item.href}>
+                        <a
+                          href={item.href}
+                          className="text-link"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </section>
         </div>
       </section>
     </SiteLayout>
