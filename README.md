@@ -14,7 +14,7 @@ The existing GitHub Pages workflow in `.github/workflows/deploy.yml` will rebuil
 
 ## Auto-publish on save
 
-You can run a local watcher that listens for changes to `content/site-content.md` and automatically commits and pushes that file.
+You can run a local watcher that listens for changes to `content/site-content.md`, `public/images/profile-avatar.png`, and `public/images/emory-campus.webp`, then automatically commits and pushes those homepage files.
 
 ```bash
 ./scripts/start-auto-publish.sh
@@ -28,8 +28,8 @@ To stop the watcher:
 
 Notes:
 
-1. The watcher only auto-commits `content/site-content.md`
-2. It validates the JSON blocks before committing
+1. The watcher auto-commits the homepage content file and the two homepage image assets
+2. It validates the JSON blocks in `content/site-content.md` before committing
 3. Logs are written to `.autopublish/auto_publish.log`
 
 ## Local dev

@@ -6,7 +6,7 @@ export const getStaticProps = makePageStaticProps('resume')
 export default function Resume({ site, pageContent }) {
   return (
     <SiteLayout title={pageContent.title} subtitle={pageContent.subtitle} site={site}>
-      <section className="card">
+      <section className="card section-panel">
         <div className="section-title-row">
           <h2>{pageContent.educationTitle}</h2>
         </div>
@@ -23,7 +23,7 @@ export default function Resume({ site, pageContent }) {
         </div>
       </section>
 
-      <section className="card">
+      <section className="card section-panel">
         <h2>{pageContent.fieldsTitle}</h2>
         <ul className="clean-list">
           {pageContent.fields.map((item) => (
@@ -32,7 +32,7 @@ export default function Resume({ site, pageContent }) {
         </ul>
       </section>
 
-      <section className="card">
+      <section className="card section-panel">
         <h2>{pageContent.experienceTitle}</h2>
         <ul className="clean-list">
           {pageContent.experience.map((item) => (
@@ -41,7 +41,7 @@ export default function Resume({ site, pageContent }) {
         </ul>
       </section>
 
-      <section className="card">
+      <section className="card section-panel">
         <h2>{pageContent.skillsTitle}</h2>
         <ul className="clean-list">
           {pageContent.skills.map((item) => (

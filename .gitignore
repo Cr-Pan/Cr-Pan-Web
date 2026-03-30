@@ -5,3 +5,6 @@ out
 .DS_Store
 ._*
 .autopublish
+content/image/
+emory.png
+pcr.png

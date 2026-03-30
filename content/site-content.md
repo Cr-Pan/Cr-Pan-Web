@@ -24,6 +24,14 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
 {
   "title": "Congrong Pan",
   "subtitle": "Incoming PhD student in Emory Econ · IO and Health Economics",
+  "profileImage": {
+    "src": "/images/profile-avatar.png",
+    "alt": "Avatar image for Congrong Pan"
+  },
+  "campusImage": {
+    "src": "/images/emory-campus.webp",
+    "alt": "Campus building at Emory University"
+  },
   "hero": {
     "sectionTitle": "Research Interests",
     "body": "My research focuses on industrial organization and health economics. I study technological diffusion within hospitals, drug development, the effects of AI adoption in hospitals, interactions among physicians, and productivity within hospitals."
@@ -33,7 +41,7 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
     { "href": "/resume", "label": "View CV", "variant": "secondary" }
   ],
   "metaItems": [
-    { "label": "Affiliation", "value": "UW-Madison / Shandong University" },
+    { "label": "Affiliation", "value": "Emory University" },
     { "label": "Email", "value": "pancrecon123@gmail.com" },
     { "label": "Status", "value": "Research Assistant" },
     { "label": "Location", "value": "Beijing" }

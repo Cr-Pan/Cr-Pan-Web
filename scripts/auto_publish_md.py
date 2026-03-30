@@ -12,7 +12,13 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONTENT_FILE = REPO_ROOT / "content" / "site-content.md"
-CONTENT_FILE_RELATIVE = CONTENT_FILE.relative_to(REPO_ROOT).as_posix()
+PROFILE_IMAGE_FILE = REPO_ROOT / "public" / "images" / "profile-avatar.png"
+CAMPUS_IMAGE_FILE = REPO_ROOT / "public" / "images" / "emory-campus.webp"
+WATCHED_FILES = [
+    {"path": CONTENT_FILE, "requires_validation": True},
+    {"path": PROFILE_IMAGE_FILE, "requires_validation": False},
+    {"path": CAMPUS_IMAGE_FILE, "requires_validation": False},
+]
 REQUIRED_SECTIONS = {"site", "home", "research", "resume"}
 SECTION_PATTERN = re.compile(
     r"^##\s+([a-z0-9-]+)\s*$([\s\S]*?)(?=^##\s+[a-z0-9-]+\s*$|\Z)",
@@ -34,6 +40,10 @@ def handle_signal(signum, _frame):
     global running
     running = False
     log(f"Received signal {signum}, stopping watcher.")
+
+
+def relative_path(path):
+    return path.relative_to(REPO_ROOT).as_posix()
 
 
 def run_git_command(args, check=True):
@@ -85,75 +95,106 @@ def get_current_branch():
     return branch
 
 
-def content_file_has_changes():
-    result = run_git_command(["status", "--porcelain", "--", CONTENT_FILE_RELATIVE], check=False)
+def get_snapshot():
+    snapshot = {}
+    for item in WATCHED_FILES:
+        path = item["path"]
+        snapshot[relative_path(path)] = path.stat().st_mtime_ns if path.exists() else None
+    return snapshot
+
+
+def diff_snapshot(previous_snapshot, current_snapshot):
+    changed_relatives = []
+    for item in WATCHED_FILES:
+        file_relative = relative_path(item["path"])
+        if previous_snapshot.get(file_relative) != current_snapshot.get(file_relative):
+            changed_relatives.append(file_relative)
+    return changed_relatives
+
+
+def resolve_changed_items(changed_relatives):
+    changed_set = set(changed_relatives)
+    return [
+        item for item in WATCHED_FILES if relative_path(item["path"]) in changed_set and item["path"].exists()
+    ]
+
+
+def watched_files_have_changes(changed_items):
+    if not changed_items:
+        return False
+
+    changed_paths = [relative_path(item["path"]) for item in changed_items]
+    result = run_git_command(["status", "--porcelain", "--", *changed_paths], check=False)
     return bool(result.stdout.strip())
 
 
-def publish_once():
-    validate_content_file()
-
-    if not content_file_has_changes():
-        log("No content changes detected after save; skipping publish.")
-        return
-
-    branch = get_current_branch()
-    commit_message = "content: auto-update site content"
-
-    run_git_command(["add", "--", CONTENT_FILE_RELATIVE])
-    diff_result = run_git_command(
-        ["diff", "--cached", "--quiet", "--", CONTENT_FILE_RELATIVE],
-        check=False,
-    )
-
-    if diff_result.returncode == 0:
-        log("The content file matches the current commit; nothing to publish.")
-        return
-
-    run_git_command(["commit", "--only", "--message", commit_message, "--", CONTENT_FILE_RELATIVE])
-    run_git_command(["push", "origin", branch])
-    log(f"Published {CONTENT_FILE_RELATIVE} to origin/{branch}.")
-
-
-def wait_for_stable_mtime(last_seen_mtime):
+def wait_for_stable_snapshot(initial_snapshot):
     stable_since = time.monotonic()
-    current_mtime = last_seen_mtime
+    current_snapshot = initial_snapshot
 
     while running:
         time.sleep(POLL_INTERVAL_SECONDS)
-        latest_mtime = CONTENT_FILE.stat().st_mtime_ns
-        if latest_mtime != current_mtime:
-            current_mtime = latest_mtime
+        latest_snapshot = get_snapshot()
+        if latest_snapshot != current_snapshot:
+            current_snapshot = latest_snapshot
             stable_since = time.monotonic()
             continue
 
         if time.monotonic() - stable_since >= DEBOUNCE_SECONDS:
-            return current_mtime
+            return current_snapshot
 
-    return current_mtime
+    return current_snapshot
+
+
+def publish_once(changed_items):
+    if any(item["requires_validation"] for item in changed_items):
+        validate_content_file()
+
+    if not watched_files_have_changes(changed_items):
+        log("No watched-file changes detected after save; skipping publish.")
+        return
+
+    branch = get_current_branch()
+    changed_paths = [relative_path(item["path"]) for item in changed_items]
+
+    run_git_command(["add", "--", *changed_paths])
+    diff_result = run_git_command(["diff", "--cached", "--quiet", "--", *changed_paths], check=False)
+    if diff_result.returncode == 0:
+        log("The watched files match the current commit; nothing to publish.")
+        return
+
+    commit_message = "site: auto-update content and homepage assets"
+    run_git_command(["commit", "--only", "--message", commit_message, "--", *changed_paths])
+    run_git_command(["push", "origin", branch])
+    log(f"Published {', '.join(changed_paths)} to origin/{branch}.")
 
 
 def main():
-    if not CONTENT_FILE.exists():
-        log(f"Content file not found: {CONTENT_FILE}")
-        return 1
-
     signal.signal(signal.SIGINT, handle_signal)
     signal.signal(signal.SIGTERM, handle_signal)
 
-    last_mtime = CONTENT_FILE.stat().st_mtime_ns
-    log(f"Watching {CONTENT_FILE_RELATIVE} for changes.")
+    initial_snapshot = get_snapshot()
+    watched_labels = ", ".join(relative_path(item["path"]) for item in WATCHED_FILES)
+    log(f"Watching {watched_labels} for changes.")
+
+    last_snapshot = initial_snapshot
 
     while running:
         time.sleep(POLL_INTERVAL_SECONDS)
-        current_mtime = CONTENT_FILE.stat().st_mtime_ns
-        if current_mtime == last_mtime:
+        current_snapshot = get_snapshot()
+        if current_snapshot == last_snapshot:
             continue
 
-        last_mtime = wait_for_stable_mtime(current_mtime)
+        stable_snapshot = wait_for_stable_snapshot(current_snapshot)
+        changed_relatives = diff_snapshot(last_snapshot, stable_snapshot)
+        last_snapshot = stable_snapshot
+
+        changed_items = resolve_changed_items(changed_relatives)
+        if not changed_items:
+            continue
 
         try:
-            publish_once()
+            publish_once(changed_items)
         except Exception as error:  # noqa: BLE001
             log(f"Auto-publish failed: {error}")
 
