@@ -14,22 +14,18 @@ export default function Home({ site, pageContent }) {
   const flagBanners = [
     {
       school: 'Shandong University of Finance and Economics',
-      shortName: 'SDUFE',
       imageSrc: withBasePath('/images/flags/shandong-university-of-finance-and-economics.jpeg', router.basePath),
     },
     {
       school: 'Shandong University',
-      shortName: 'Shandong U',
       imageSrc: withBasePath('/images/flags/shandong-university.jpeg', router.basePath),
     },
     {
       school: 'University of Wisconsin-Madison',
-      shortName: 'UW-Madison',
       imageSrc: withBasePath('/images/flags/uw-madison.png', router.basePath),
     },
     {
       school: 'Emory University',
-      shortName: 'Emory',
       imageSrc: withBasePath('/images/flags/emory-university.jpeg', router.basePath),
     },
   ]
@@ -41,35 +37,6 @@ export default function Home({ site, pageContent }) {
       site={site}
       showPageHeading={false}
     >
-      <section className="flags-showcase" aria-label="Academic flags">
-        <div className="flags-showcase-header">
-          <p className="section-kicker">Academic Journey</p>
-          <p className="flags-showcase-note">Four institutions, suspended as paper-style hanging banners.</p>
-        </div>
-
-        <div className="flags-rack" aria-hidden="true" />
-
-        <div className="flags-grid">
-          {flagBanners.map((flag) => (
-            <figure
-              key={flag.school}
-              className="flag-banner"
-            >
-              <div className="flag-banner-top">
-                <span className="flag-banner-tag">{flag.shortName}</span>
-              </div>
-              <div className="flag-banner-surface">
-                <img
-                  src={flag.imageSrc}
-                  alt={`${flag.school} flag`}
-                  className="flag-banner-image"
-                />
-              </div>
-            </figure>
-          ))}
-        </div>
-      </section>
-
       <section className="home-layout">
         <aside className="profile-rail">
           <div className="profile-card">
@@ -120,6 +87,22 @@ export default function Home({ site, pageContent }) {
                 alt={pageContent.campusImage?.alt}
                 className="hero-banner-image"
               />
+              <div className="hero-banner-flags" aria-label="Academic flags">
+                <div className="hero-banner-rail" aria-hidden="true" />
+                <div className="hero-banner-flag-row">
+                  {flagBanners.map((flag) => (
+                    <figure key={flag.school} className="hero-flag-banner">
+                      <div className="hero-flag-banner-sheet">
+                        <img
+                          src={flag.imageSrc}
+                          alt={`${flag.school} flag`}
+                          className="hero-flag-banner-image"
+                        />
+                      </div>
+                    </figure>
+                  ))}
+                </div>
+              </div>
             </div>
             <div className="hero-banner-copy">
               <div className="hero-banner-subtitle" aria-label="Academic summary">
