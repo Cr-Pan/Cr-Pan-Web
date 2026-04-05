@@ -11,24 +11,6 @@ export default function Home({ site, pageContent }) {
   const profileImageSrc = withBasePath(pageContent.profileImage?.src, router.basePath)
   const campusImageSrc = withBasePath(pageContent.campusImage?.src, router.basePath)
   const subtitleLines = pageContent.subtitle?.split(' · ').filter(Boolean) ?? []
-  const flagBanners = [
-    {
-      school: 'Shandong University of Finance and Economics',
-      imageSrc: withBasePath('/images/flags/shandong-university-of-finance-and-economics.jpeg', router.basePath),
-    },
-    {
-      school: 'Shandong University',
-      imageSrc: withBasePath('/images/flags/shandong-university.jpeg', router.basePath),
-    },
-    {
-      school: 'University of Wisconsin-Madison',
-      imageSrc: withBasePath('/images/flags/uw-madison.png', router.basePath),
-    },
-    {
-      school: 'Emory University',
-      imageSrc: withBasePath('/images/flags/emory-university.jpeg', router.basePath),
-    },
-  ]
 
   return (
     <SiteLayout
@@ -87,22 +69,6 @@ export default function Home({ site, pageContent }) {
                 alt={pageContent.campusImage?.alt}
                 className="hero-banner-image"
               />
-              <div className="hero-banner-flags" aria-label="Academic flags">
-                <div className="hero-banner-rail" aria-hidden="true" />
-                <div className="hero-banner-flag-row">
-                  {flagBanners.map((flag) => (
-                    <figure key={flag.school} className="hero-flag-banner">
-                      <div className="hero-flag-banner-sheet">
-                        <img
-                          src={flag.imageSrc}
-                          alt={`${flag.school} flag`}
-                          className="hero-flag-banner-image"
-                        />
-                      </div>
-                    </figure>
-                  ))}
-                </div>
-              </div>
             </div>
             <div className="hero-banner-copy">
               <div className="hero-banner-subtitle" aria-label="Academic summary">
