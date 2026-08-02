@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import { withBasePath } from '../lib/assetPath'
 
 const defaultNavItems = [
@@ -8,6 +9,60 @@ const defaultNavItems = [
   { href: '/research', label: 'Research' },
   { href: '/resume', label: 'CV' },
 ]
+
+const THEME_STORAGE_KEY = 'congrong-pan-theme'
+
+function ThemeToggle() {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const activeIsDark = document.documentElement.dataset.theme === 'dark'
+    const themeColor = document.querySelector('meta[name="theme-color"]')
+
+    if (themeColor) {
+      themeColor.setAttribute('content', activeIsDark ? '#07111f' : '#012169')
+    }
+
+    setIsDark(activeIsDark)
+  }, [])
+
+  function toggleTheme() {
+    const nextIsDark = !isDark
+    const root = document.documentElement
+    const themeColor = document.querySelector('meta[name="theme-color"]')
+
+    if (nextIsDark) {
+      root.dataset.theme = 'dark'
+    } else {
+      delete root.dataset.theme
+    }
+
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, nextIsDark ? 'dark' : 'light')
+    } catch (_error) {
+      // The theme still works when browser storage is unavailable.
+    }
+
+    if (themeColor) {
+      themeColor.setAttribute('content', nextIsDark ? '#07111f' : '#012169')
+    }
+
+    setIsDark(nextIsDark)
+  }
+
+  return (
+    <button
+      type="button"
+      className="theme-toggle"
+      onClick={toggleTheme}
+      aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      aria-pressed={isDark}
+      title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+    >
+      <span aria-hidden="true">{isDark ? '☾' : '☀'}</span>
+    </button>
+  )
+}
 
 export default function SiteLayout({ title, subtitle, site, children, showPageHeading = true }) {
   const router = useRouter()
@@ -48,21 +103,24 @@ export default function SiteLayout({ title, subtitle, site, children, showPageHe
             <span className="brand-field">Economics</span>
           </Link>
 
-          <nav className="top-nav" aria-label="Main navigation">
-            {navigation.map((item) => {
-              const active = router.pathname === item.href
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={active ? 'nav-link is-active' : 'nav-link'}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              )
-            })}
-          </nav>
+          <div className="header-actions">
+            <nav className="top-nav" aria-label="Main navigation">
+              {navigation.map((item) => {
+                const active = router.pathname === item.href
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={active ? 'nav-link is-active' : 'nav-link'}
+                    aria-current={active ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                )
+              })}
+            </nav>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
