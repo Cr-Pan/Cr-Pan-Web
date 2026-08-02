@@ -10,7 +10,7 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
   "kicker": "Economics · Emory University",
   "footerName": "Congrong Pan",
   "footerLastUpdated": "August 2026",
-  "description": "Congrong Pan is an incoming Ph.D. student in Economics at Emory University.",
+  "description": "Congrong Pan is a Ph.D. student in Economics at Emory University.",
   "siteUrl": "https://cr-pan.github.io/Cr-Pan-Web",
   "affiliation": "Emory University · Department of Economics",
   "email": "pancrecon123@gmail.com",
@@ -26,7 +26,7 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
 ```json
 {
   "title": "Congrong Pan",
-  "subtitle": "Incoming Ph.D. Student in Economics at Emory University",
+  "subtitle": "Ph.D. Student in Economics at Emory University",
   "profileImage": {
     "src": "/images/congrong-pan-portrait.jpg",
     "alt": "Portrait of Congrong Pan"

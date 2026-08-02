@@ -31,7 +31,7 @@ export default function Home({ site, pageContent }) {
     >
       <section className="home-hero">
         <div className="hero-copy">
-          <p className="eyebrow">Incoming Ph.D. Student · Fall 2026</p>
+          <p className="eyebrow">Economics · Emory University</p>
           <h1 className="hero-name">{pageContent.title}</h1>
           <p className="hero-role">{pageContent.subtitle}</p>
 
@@ -106,7 +106,6 @@ export default function Home({ site, pageContent }) {
         <div className="emory-band-overlay">
           <p className="eyebrow light-eyebrow">Next chapter</p>
           <h2>Emory Economics · Atlanta</h2>
-          <p>Beginning the Ph.D. program in Fall 2026.</p>
         </div>
       </section>
 
