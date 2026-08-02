@@ -406,7 +406,7 @@ html[data-theme="dark"] ::selection {
 
 .profile-facts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 0.9fr 0.9fr 1.3fr;
   max-width: 680px;
   margin: 46px 0 0;
   padding: 22px 0 0;
@@ -421,6 +421,10 @@ html[data-theme="dark"] ::selection {
 .profile-facts div + div {
   padding-left: 20px;
   border-left: 1px solid var(--line);
+}
+
+.profile-facts div:last-child {
+  padding-right: 0;
 }
 
 .profile-facts dt {
@@ -444,6 +448,12 @@ html[data-theme="dark"] ::selection {
 .profile-facts a {
   text-decoration-color: var(--soft-accent-border);
   text-underline-offset: 3px;
+}
+
+.profile-facts a[href^="mailto:"],
+.footer-contact a[href^="mailto:"] {
+  white-space: nowrap;
+  overflow-wrap: normal;
 }
 
 .portrait-figure {
