@@ -7,11 +7,15 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
 
 ```json
 {
-  "kicker": "Personal Academic Website",
+  "kicker": "Economics · Emory University",
   "footerName": "Congrong Pan",
-  "footerLastUpdated": "March 2026",
+  "footerLastUpdated": "August 2026",
+  "description": "Congrong Pan is an incoming Ph.D. student in Economics at Emory University, working in industrial organization and health economics.",
+  "siteUrl": "https://cr-pan.github.io/Cr-Pan-Web",
+  "affiliation": "Emory University · Department of Economics",
+  "email": "pancrecon123@gmail.com",
   "navigation": [
-    { "href": "/", "label": "Home" },
+    { "href": "/", "label": "About" },
     { "href": "/research", "label": "Research" },
     { "href": "/resume", "label": "CV" }
   ]
@@ -23,18 +27,18 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
 ```json
 {
   "title": "Congrong Pan",
-  "subtitle": "Incoming PhD student in Emory Econ · IO and Health Economics",
+  "subtitle": "Incoming Ph.D. Student in Economics at Emory University",
   "profileImage": {
-    "src": "/images/profile-avatar.png",
-    "alt": "Avatar image for Congrong Pan"
+    "src": "/images/congrong-pan-portrait.jpg",
+    "alt": "Portrait of Congrong Pan"
   },
   "campusImage": {
     "src": "/images/emory-campus.webp",
     "alt": "Campus building at Emory University"
   },
   "hero": {
-    "sectionTitle": "Research Interests",
-    "body": "My research focuses on industrial organization and health economics. I study technological diffusion within hospitals, drug development, the effects of AI adoption in hospitals, interactions among physicians, and productivity within hospitals."
+    "sectionTitle": "Research agenda",
+    "body": "My research focuses on industrial organization and health economics. I study technological diffusion within hospitals, drug development, AI adoption in health care, interactions among physicians, and hospital productivity."
   },
   "ctaButtons": [
     { "href": "/research", "label": "View Research", "variant": "primary" },
@@ -42,9 +46,8 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
   ],
   "metaItems": [
     { "label": "Affiliation", "value": "Emory University" },
-    { "label": "Email", "value": "pancrecon123@gmail.com" },
-    { "label": "Status", "value": "Research Assistant" },
-    { "label": "Location", "value": "Beijing" }
+    { "label": "Fields", "value": "IO · Health" },
+    { "label": "Email", "value": "pancrecon123@gmail.com" }
   ],
   "recentUpdatesTitle": "Recent Updates",
   "recentUpdates": [
@@ -115,18 +118,21 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
   "papers": [
     {
       "title": "Gaming the Metric: Ratio-Based Surgery Targets and Hospital Behavior in China",
+      "status": "Working Paper",
       "meta": "Working Paper · Solo Author",
       "summary": "This paper studies distortions in Chinese hospitals after a 2019 reform tied presidents' evaluations to the share of high-complexity surgeries. Using surgical records and a regression discontinuity design around a 2020 leadership transition, I find reductions in routine surgeries and increased Level-4 coding intensity."
     },
     {
       "title": "Can Credit Collections on Traffic Violations Save Lives? Evidence from Chinese Auto Insurance Market",
       "href": "https://www.dropbox.com/scl/fi/4u5oc5xnglbl7cyadyjul/Credit.pdf?rlkey=mxqnt2oi349s1ssl3rrebf0x0&st=9ekqtrg7&dl=0",
+      "status": "Revise & Resubmit",
       "meta": "R&R (Resubmitted) in Regional Science and Urban Economics · with Ying Liu, Lihua Qin, Fangjie Zhang",
       "summary": "Using a quasi-experimental policy change and individual underwriting/claims data in the Chinese auto insurance market, we estimate the causal effect of credit-based traffic-violation sanctions on road safety. The policy significantly reduced fatalities and injuries."
     },
     {
       "title": "Can Air Pollution Affect Our Sentiments: Social Media Evidence from Japan",
       "href": "https://www.dropbox.com/scl/fi/ckhp4eq5tq1ufbrblibao/cesifo1_wp12030.pdf?rlkey=qvnazf0ih85r4eidet603jlux&st=07teihue&dl=0",
+      "status": "CESifo Working Paper",
       "meta": "CESifo Working Paper No. 12030 · with Zehao Lin, Ying Liu, Lutz Sager",
       "summary": "This study identifies the impact of air pollution on sentiment using city-day panel data from Japanese cities and wind-based instruments for PM2.5/PM10. The findings show sizable declines in sentiment, especially for negative emotions such as anger, anxiety, and sadness."
     }
@@ -163,7 +169,7 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
       "detail": "B.A. in Economics · Jinan, China"
     }
   ],
-  "fieldsTitle": "Fields of Interests",
+  "fieldsTitle": "Fields of Interest",
   "fields": [
     "Industrial Organization",
     "Health Economics"
@@ -173,7 +179,7 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
     "Research Assistant for Prof. Panle Barwick, University of Wisconsin-Madison (05/2025 - Present)",
     "Full-time Research Assistant, National School of Development, Peking University (07/2025 - Present)"
   ],
-  "skillsTitle": "Other Skills",
+  "skillsTitle": "Languages & Technical Skills",
   "skills": [
     "Languages: Mandarin Chinese (Native), English (Fluent)",
     "Programming: R, Python, Stata, ArcGIS, QGIS, LaTeX"

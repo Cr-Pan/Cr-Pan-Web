@@ -1,8 +1,10 @@
+import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { withBasePath } from '../lib/assetPath'
 
 const defaultNavItems = [
-  { href: '/', label: 'Home' },
+  { href: '/', label: 'About' },
   { href: '/research', label: 'Research' },
   { href: '/resume', label: 'CV' },
 ]
@@ -10,21 +12,42 @@ const defaultNavItems = [
 export default function SiteLayout({ title, subtitle, site, children, showPageHeading = true }) {
   const router = useRouter()
   const navigation = site?.navigation?.length ? site.navigation : defaultNavItems
-  const kicker = site?.kicker ?? 'Personal Academic Website'
   const siteName = site?.footerName ?? title
-  const footerName = site?.footerName ?? title
-  const footerLastUpdated = site?.footerLastUpdated
+  const pageTitle = showPageHeading ? `${title} — ${siteName}` : `${siteName} — Economics`
+  const description = subtitle || site?.description
+  const ogImagePath = withBasePath('/og.png', router.basePath)
+  const ogImage = site?.siteUrl ? `${site.siteUrl}/og.png` : ogImagePath
 
   return (
     <div className="site-shell">
-      <div className="container">
-        <header className="site-header">
-          <div className="site-brand">
-            <p className="kicker">{kicker}</p>
-            <Link href="/" className="site-brand-link">
-              {siteName}
-            </Link>
-          </div>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={ogImage} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="theme-color" content="#012169" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
+
+      <div className="emory-rule" aria-hidden="true">
+        <span />
+      </div>
+
+      <header className="site-header">
+        <div className="site-header-inner">
+          <Link href="/" className="site-brand-link" aria-label={`${siteName}, home`}>
+            <span className="brand-name">{siteName}</span>
+            <span className="brand-field">Economics</span>
+          </Link>
+
           <nav className="top-nav" aria-label="Main navigation">
             {navigation.map((item) => {
               const active = router.pathname === item.href
@@ -33,31 +56,43 @@ export default function SiteLayout({ title, subtitle, site, children, showPageHe
                   key={item.href}
                   href={item.href}
                   className={active ? 'nav-link is-active' : 'nav-link'}
+                  aria-current={active ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>
               )
             })}
           </nav>
-        </header>
+        </div>
+      </header>
 
+      <main id="main-content" className="container">
         {showPageHeading ? (
           <section className="page-heading">
-            <p className="page-kicker">{kicker}</p>
+            <p className="eyebrow">{site?.kicker ?? 'Academic profile'}</p>
             <h1>{title}</h1>
-            {subtitle ? <p className="subtitle">{subtitle}</p> : null}
+            {subtitle ? <p className="page-subtitle">{subtitle}</p> : null}
           </section>
         ) : null}
 
-        <main className="page-body">{children}</main>
+        <div className="page-body">{children}</div>
+      </main>
 
-        <footer className="site-footer">
-          <p>
-            © {new Date().getFullYear()} {footerName}
-            {footerLastUpdated ? ` · Last updated: ${footerLastUpdated}` : ''}
-          </p>
-        </footer>
-      </div>
+      <footer className="site-footer">
+        <div className="site-footer-inner">
+          <div>
+            <p className="footer-name">{siteName}</p>
+            <p>{site?.affiliation ?? 'Emory University · Department of Economics'}</p>
+          </div>
+          <div className="footer-contact">
+            {site?.email ? <a href={`mailto:${site.email}`}>{site.email}</a> : null}
+            <p>
+              © {new Date().getFullYear()}
+              {site?.footerLastUpdated ? ` · Updated ${site.footerLastUpdated}` : ''}
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

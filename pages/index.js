@@ -2,15 +2,24 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import SiteLayout from '../components/SiteLayout'
 import { withBasePath } from '../lib/assetPath'
-import { makePageStaticProps } from '../lib/siteContent'
+import { getSiteContent } from '../lib/siteContent'
 
-export const getStaticProps = makePageStaticProps('home')
+export function getStaticProps() {
+  const content = getSiteContent()
 
-export default function Home({ site, pageContent }) {
+  return {
+    props: {
+      site: content.site,
+      pageContent: content.home,
+      researchContent: content.research,
+    },
+  }
+}
+
+export default function Home({ site, pageContent, researchContent }) {
   const router = useRouter()
   const profileImageSrc = withBasePath(pageContent.profileImage?.src, router.basePath)
   const campusImageSrc = withBasePath(pageContent.campusImage?.src, router.basePath)
-  const subtitleLines = pageContent.subtitle?.split(' · ').filter(Boolean) ?? []
 
   return (
     <SiteLayout
@@ -19,103 +28,162 @@ export default function Home({ site, pageContent }) {
       site={site}
       showPageHeading={false}
     >
-      <section className="home-layout">
-        <aside className="profile-rail">
-          <div className="profile-card">
-            <div className="profile-portrait-wrap">
-              <img
-                src={profileImageSrc}
-                alt={pageContent.profileImage?.alt}
-                className="profile-portrait"
-              />
-            </div>
-            <p className="profile-kicker">{site?.kicker}</p>
-            <h1 className="profile-name">{pageContent.title}</h1>
+      <section className="home-hero">
+        <div className="hero-copy">
+          <p className="eyebrow">Incoming Ph.D. Student · Fall 2026</p>
+          <h1 className="hero-name">{pageContent.title}</h1>
+          <p className="hero-role">{pageContent.subtitle}</p>
+          <p className="hero-intro">{pageContent.hero.body}</p>
 
-            <div className="profile-meta-list">
-              {pageContent.metaItems.map((item) => (
-                <p key={item.label}>
-                  <span>{item.label}</span>
+          <div className="hero-actions" aria-label="Profile links">
+            {pageContent.ctaButtons.map((button) => (
+              <Link
+                key={`${button.href}-${button.label}`}
+                href={button.href}
+                className={button.variant === 'secondary' ? 'button button-quiet' : 'button button-primary'}
+              >
+                {button.label}
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
+            <a className="button button-text" href={`mailto:${site.email}`}>
+              Email me
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <dl className="profile-facts">
+            {pageContent.metaItems.map((item) => (
+              <div key={item.label}>
+                <dt>{item.label}</dt>
+                <dd>
                   {item.label.toLowerCase() === 'email' ? (
-                    <a href={`mailto:${item.value}`} className="text-link">
-                      {item.value}
-                    </a>
+                    <a href={`mailto:${item.value}`}>{item.value}</a>
                   ) : (
                     item.value
                   )}
-                </p>
-              ))}
-            </div>
-
-            <div className="cta-row">
-              {pageContent.ctaButtons.map((button) => (
-                <Link
-                  key={`${button.href}-${button.label}`}
-                  href={button.href}
-                  className={button.variant === 'secondary' ? 'btn btn-secondary' : 'btn btn-primary'}
-                >
-                  {button.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </aside>
-
-        <div className="home-main">
-          <section className="hero-banner">
-            <div className="hero-banner-media">
-              <img
-                src={campusImageSrc}
-                alt={pageContent.campusImage?.alt}
-                className="hero-banner-image"
-              />
-            </div>
-            <div className="hero-banner-copy">
-              <div className="hero-banner-subtitle" aria-label="Academic summary">
-                {subtitleLines.map((line) => (
-                  <p className="hero-banner-subtitle-line" key={line}>
-                    {line}
-                  </p>
-                ))}
+                </dd>
               </div>
-              <p className="section-kicker">{pageContent.hero.sectionTitle}</p>
-              <p className="hero-banner-text">{pageContent.hero.body}</p>
-            </div>
-          </section>
+            ))}
+          </dl>
+        </div>
 
-          <section className="card section-panel">
-            <h2>{pageContent.recentUpdatesTitle}</h2>
-            <ul className="clean-list">
-              {pageContent.recentUpdates.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </section>
+        <figure className="portrait-figure">
+          <div className="portrait-frame">
+            <img
+              src={profileImageSrc}
+              alt={pageContent.profileImage?.alt}
+              className="profile-portrait"
+            />
+          </div>
+          <figcaption>
+            <span>Emory University</span>
+            <span>Department of Economics</span>
+          </figcaption>
+        </figure>
+      </section>
 
-          <section className="card section-panel">
-            <h2>{pageContent.recommendedLinks.sectionTitle}</h2>
-            <div className="stacked-link-groups">
-              {pageContent.recommendedLinks.groups.map((group) => (
-                <div className="link-group" key={group.title}>
-                  <h3>{group.title}</h3>
-                  <ul className="link-list">
-                    {group.links.map((item) => (
-                      <li key={item.href}>
-                        <a
-                          href={item.href}
-                          className="text-link"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {item.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+      <section className="research-overview section-rule">
+        <div className="section-heading">
+          <p className="eyebrow">Research</p>
+          <h2>Questions at the intersection of firms, health, and technology.</h2>
+        </div>
+        <p className="section-lead">
+          I use applied microeconomics and administrative data to study how incentives and new
+          technologies shape decisions inside health-care organizations.
+        </p>
+      </section>
+
+      <section className="selected-work" aria-labelledby="selected-research-title">
+        <div className="section-title-row">
+          <h2 id="selected-research-title">Selected research</h2>
+          <Link href="/research" className="inline-link">
+            All research <span aria-hidden="true">→</span>
+          </Link>
+        </div>
+
+        <div className="paper-list home-paper-list">
+          {researchContent.papers.map((paper, index) => (
+            <article className="paper-row" key={paper.title}>
+              <p className="paper-number">{String(index + 1).padStart(2, '0')}</p>
+              <div className="paper-copy">
+                <p className="paper-status">{paper.status ?? paper.meta.split('·')[0].trim()}</p>
+                <h3>
+                  {paper.href ? (
+                    <a href={paper.href} target="_blank" rel="noreferrer">
+                      {paper.title}
+                    </a>
+                  ) : (
+                    paper.title
+                  )}
+                </h3>
+                <p>{paper.summary}</p>
+              </div>
+              {paper.href ? (
+                <a
+                  className="paper-arrow"
+                  href={paper.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Open ${paper.title}`}
+                >
+                  ↗
+                </a>
+              ) : (
+                <span className="paper-arrow is-muted" aria-hidden="true">—</span>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="news-section section-rule" aria-labelledby="news-title">
+        <div className="section-heading compact-heading">
+          <p className="eyebrow">News</p>
+          <h2 id="news-title">Recent updates</h2>
+        </div>
+        <ol className="news-list">
+          {pageContent.recentUpdates.map((item) => {
+            const [date, ...update] = item.split(': ')
+            return (
+              <li key={item}>
+                <time>{date}</time>
+                <p>{update.join(': ') || item}</p>
+              </li>
+            )
+          })}
+        </ol>
+      </section>
+
+      <section className="emory-band">
+        <img src={campusImageSrc} alt={pageContent.campusImage?.alt} />
+        <div className="emory-band-overlay">
+          <p className="eyebrow light-eyebrow">Next chapter</p>
+          <h2>Emory Economics · Atlanta</h2>
+          <p>Beginning the Ph.D. program in Fall 2026.</p>
+        </div>
+      </section>
+
+      <section className="academic-links section-rule" aria-labelledby="academic-links-title">
+        <div className="section-heading compact-heading">
+          <p className="eyebrow">Academic network</p>
+          <h2 id="academic-links-title">Institutions &amp; researchers</h2>
+        </div>
+        <div className="link-columns">
+          {pageContent.recommendedLinks.groups.map((group) => (
+            <div className="link-column" key={group.title}>
+              <h3>{group.title}</h3>
+              <ul>
+                {group.links.map((item) => (
+                  <li key={item.href}>
+                    <a href={item.href} target="_blank" rel="noreferrer">
+                      {item.label} <span aria-hidden="true">↗</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </section>
+          ))}
         </div>
       </section>
     </SiteLayout>

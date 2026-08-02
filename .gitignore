@@ -5,6 +5,7 @@ out
 .DS_Store
 ._*
 .autopublish
+.tools/
 content/image/
 emory.png
 pcr.png

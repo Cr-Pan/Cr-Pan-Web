@@ -12,7 +12,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CONTENT_FILE = REPO_ROOT / "content" / "site-content.md"
-PROFILE_IMAGE_FILE = REPO_ROOT / "public" / "images" / "profile-avatar.png"
+PROFILE_IMAGE_FILE = REPO_ROOT / "public" / "images" / "congrong-pan-portrait.jpg"
 CAMPUS_IMAGE_FILE = REPO_ROOT / "public" / "images" / "emory-campus.webp"
 WATCHED_FILES = [
     {"path": CONTENT_FILE, "requires_validation": True},
