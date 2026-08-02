@@ -6,17 +6,18 @@ import { getSiteContent } from '../lib/siteContent'
 
 export function getStaticProps() {
   const content = getSiteContent()
+  const homePageContent = { ...content.home }
+  delete homePageContent.hero
 
   return {
     props: {
       site: content.site,
-      pageContent: content.home,
-      researchContent: content.research,
+      pageContent: homePageContent,
     },
   }
 }
 
-export default function Home({ site, pageContent, researchContent }) {
+export default function Home({ site, pageContent }) {
   const router = useRouter()
   const profileImageSrc = withBasePath(pageContent.profileImage?.src, router.basePath)
   const campusImageSrc = withBasePath(pageContent.campusImage?.src, router.basePath)
@@ -33,7 +34,6 @@ export default function Home({ site, pageContent, researchContent }) {
           <p className="eyebrow">Incoming Ph.D. Student · Fall 2026</p>
           <h1 className="hero-name">{pageContent.title}</h1>
           <p className="hero-role">{pageContent.subtitle}</p>
-          <p className="hero-intro">{pageContent.hero.body}</p>
 
           <div className="hero-actions" aria-label="Profile links">
             {pageContent.ctaButtons.map((button) => (
@@ -81,60 +81,6 @@ export default function Home({ site, pageContent, researchContent }) {
             <span>Department of Economics</span>
           </figcaption>
         </figure>
-      </section>
-
-      <section className="research-overview section-rule">
-        <div className="section-heading">
-          <p className="eyebrow">Research</p>
-          <h2>Questions at the intersection of firms, health, and technology.</h2>
-        </div>
-        <p className="section-lead">
-          I use applied microeconomics and administrative data to study how incentives and new
-          technologies shape decisions inside health-care organizations.
-        </p>
-      </section>
-
-      <section className="selected-work" aria-labelledby="selected-research-title">
-        <div className="section-title-row">
-          <h2 id="selected-research-title">Selected research</h2>
-          <Link href="/research" className="inline-link">
-            All research <span aria-hidden="true">→</span>
-          </Link>
-        </div>
-
-        <div className="paper-list home-paper-list">
-          {researchContent.papers.map((paper, index) => (
-            <article className="paper-row" key={paper.title}>
-              <p className="paper-number">{String(index + 1).padStart(2, '0')}</p>
-              <div className="paper-copy">
-                <p className="paper-status">{paper.status ?? paper.meta.split('·')[0].trim()}</p>
-                <h3>
-                  {paper.href ? (
-                    <a href={paper.href} target="_blank" rel="noreferrer">
-                      {paper.title}
-                    </a>
-                  ) : (
-                    paper.title
-                  )}
-                </h3>
-                <p>{paper.summary}</p>
-              </div>
-              {paper.href ? (
-                <a
-                  className="paper-arrow"
-                  href={paper.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={`Open ${paper.title}`}
-                >
-                  ↗
-                </a>
-              ) : (
-                <span className="paper-arrow is-muted" aria-hidden="true">—</span>
-              )}
-            </article>
-          ))}
-        </div>
       </section>
 
       <section className="news-section section-rule" aria-labelledby="news-title">

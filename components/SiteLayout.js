@@ -6,7 +6,6 @@ import { withBasePath } from '../lib/assetPath'
 
 const defaultNavItems = [
   { href: '/', label: 'About' },
-  { href: '/research', label: 'Research' },
   { href: '/resume', label: 'CV' },
 ]
 

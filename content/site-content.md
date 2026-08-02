@@ -10,13 +10,12 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
   "kicker": "Economics · Emory University",
   "footerName": "Congrong Pan",
   "footerLastUpdated": "August 2026",
-  "description": "Congrong Pan is an incoming Ph.D. student in Economics at Emory University, working in industrial organization and health economics.",
+  "description": "Congrong Pan is an incoming Ph.D. student in Economics at Emory University.",
   "siteUrl": "https://cr-pan.github.io/Cr-Pan-Web",
   "affiliation": "Emory University · Department of Economics",
   "email": "pancrecon123@gmail.com",
   "navigation": [
     { "href": "/", "label": "About" },
-    { "href": "/research", "label": "Research" },
     { "href": "/resume", "label": "CV" }
   ]
 }
@@ -41,12 +40,11 @@ Edit the JSON inside each section, then commit and push to `main` to publish the
     "body": "My research focuses on industrial organization and health economics. I study technological diffusion within hospitals, drug development, AI adoption in health care, interactions among physicians, and hospital productivity."
   },
   "ctaButtons": [
-    { "href": "/research", "label": "View Research", "variant": "primary" },
-    { "href": "/resume", "label": "View CV", "variant": "secondary" }
+    { "href": "/resume", "label": "View CV", "variant": "primary" }
   ],
   "metaItems": [
     { "label": "Affiliation", "value": "Emory University" },
-    { "label": "Fields", "value": "IO · Health" },
+    { "label": "Program", "value": "Economics Ph.D." },
     { "label": "Email", "value": "pancrecon123@gmail.com" }
   ],
   "recentUpdatesTitle": "Recent Updates",

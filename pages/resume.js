@@ -35,7 +35,6 @@ export default function Resume({ site, pageContent }) {
             <div className="timeline">
               {pageContent.education.map((item) => (
                 <article className="timeline-item" key={`${item.time}-${item.institution}`}>
-                  <time>{item.time}</time>
                   <div>
                     <h3>{item.institution}</h3>
                     <p>{item.detail}</p>
